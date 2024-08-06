@@ -1,7 +1,13 @@
-export default function SearchPage(){
+import SearchPage from "./SearchPage";
+
+export const metadata = {
+    title: "Search Cocktail - The Cocktail Viewer",
+  };
+
+export default function Page(){
     return(
-        <main>
-            <h1 className="text-xl">Search Cocktails</h1>
+        <main className="max-w-6xl my-8">
+            <SearchPage/>
         </main>
     )
 }

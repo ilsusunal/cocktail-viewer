@@ -1,3 +1,6 @@
+export const metadata = {
+    title: "Login - The Cocktail Viewer",
+};
 export default function LoginPage() {
     return (
         <main>
