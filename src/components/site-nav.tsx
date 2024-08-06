@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"
 import { useState } from "react";
 import Basket from "./Basket";
+import { useBasket } from "@/context/BasketContext";
 
 const siteRoutes = [
     { href: '/', label: 'Home' },
@@ -13,11 +14,8 @@ const siteRoutes = [
 
 export default function SiteNav() {
     const pathname = usePathname();
-    const [isBasketOpen, setBasketOpen] = useState(false);
-    const [basketItems, setBasketItems] = useState<any[]>([]);
+    const { basket, isBasketOpen, toggleBasket } = useBasket();
 
-    const toggleBasket = () => setBasketOpen(prev => !prev);
-    const closeBasket = () => setBasketOpen(false);
 
     return (
         <nav>
@@ -36,7 +34,7 @@ export default function SiteNav() {
                     <button onClick={toggleBasket} className="p-2">
                         <img src="./basket-fill.svg" alt="Basket" className="w-6 h-6" />
                     </button>
-                    <Basket isOpen={isBasketOpen} onClose={closeBasket} items={basketItems} />
+                    {isBasketOpen && <Basket/>} ({basket.length})
                 </li>
             </ul>
         </nav>

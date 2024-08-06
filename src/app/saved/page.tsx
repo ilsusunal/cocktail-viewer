@@ -1,12 +1,13 @@
+import SavedPage from "./SavedPage";
 
 export const metadata = {
     title: "Saved Cocktails - The Cocktail Viewer",
   };
 
-export default function SavedPage() {
+export default function Page() {
     return (
-        <main>
-            <h1 className="text-xl">The Saved Cocktails</h1>
+        <main className="max-w-6xl my-8">
+            <SavedPage/>
         </main>
     )
 }

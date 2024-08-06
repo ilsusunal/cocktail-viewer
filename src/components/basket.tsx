@@ -1,18 +1,43 @@
 "use client"
 
-export default function Basket({ isOpen, onClose, items }: { isOpen: boolean, onClose: () => void, items: any[] }) {
-    if (!isOpen) return null;
+import { useBasket } from "@/context/BasketContext";
+import { useRouter } from "next/navigation";
+
+export default function Basket() {
+    const { basket, removeFromBasket, clearBasket, toggleBasket } = useBasket();
+    const router = useRouter();
+
+    const saveToLocalStorage = () => {
+        const saved = localStorage.getItem('savedCocktails');
+        const existingSaved = saved ? JSON.parse(saved) : [];
+        const updatedSaved = [...existingSaved, ...basket.filter(basketItem =>
+            !existingSaved.some((savedItem: { idDrink: string; }) => savedItem.idDrink === basketItem.idDrink)
+        )];
+        localStorage.setItem('savedCocktails', JSON.stringify(updatedSaved));
+        clearBasket();
+        toggleBasket();
+        router.push('/saved');
+    };
+
     return (
         <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-64 border border-gray-200 z-50">
-            <h2 className="text-xl font-bold mb-4 px-4 py-2">Basket</h2>
-            <ul className="px-4 py-2">
-                {items.length === 0 ? (
-                    <li>Your basket is empty.</li>
+            <ul className="py-2 px-6">
+                {basket.length === 0 ? (
+                    <li>Your basket is empty</li>
                 ) : (
-                    items.map((item, index) => (
-                        <li key={index} className="py-1 border-b border-gray-200">{item.name}</li>
+                    basket.map(cocktail => (
+                        <li key={cocktail.idDrink} className="flex justify-between items-center mt-2 text-gray-800 border-b-2">
+                            <span>{cocktail.strDrink}</span>
+                            <button onClick={() => removeFromBasket(cocktail.idDrink)} className="text-amber-600 font-semibold hover:underline">Remove</button>
+                        </li>
                     ))
                 )}
+                <button
+                    onClick={saveToLocalStorage}
+                    className="mt-2 bg-amber-500 text-white py-1 px-3 rounded-full "
+                >
+                    Save
+                </button>
             </ul>
         </div>
     )

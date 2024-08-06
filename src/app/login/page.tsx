@@ -1,10 +1,12 @@
+import LoginPage from "./LoginPage";
+
 export const metadata = {
     title: "Login - The Cocktail Viewer",
 };
-export default function LoginPage() {
+export default function Page() {
     return (
-        <main>
-            <h1 className="text-xl">Login</h1>
+        <main className="max-w-6xl my-8">
+            <LoginPage />
         </main>
     )
 }
