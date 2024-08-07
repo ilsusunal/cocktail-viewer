@@ -16,7 +16,7 @@ export default function CocktailCard({ cocktail }: CocktailCardProps) {
             <p className="text-sm mt-2">Blablabla</p>
             <button
                 onClick={() => addToBasket(cocktail)}
-                className="mt-2 bg-amber-500 hover:bg-amber-800 text-white py-1 px-3 rounded-full"
+                className="mt-2 bg-amber-500 hover:bg-amber-800 text-white py-1 px-4 rounded-full"
             >
                 Add to Basket
             </button>

@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation"
 import { useState } from "react";
 import Basket from "./Basket";
 import { useBasket } from "@/context/BasketContext";
+import ProtectedPage from "./ProtectedPage";
+import WarningModal from "./WarningModal";
 
 const siteRoutes = [
     { href: '/', label: 'Home' },
@@ -15,7 +17,16 @@ const siteRoutes = [
 export default function SiteNav() {
     const pathname = usePathname();
     const { basket, isBasketOpen, toggleBasket } = useBasket();
+    const [showWarning, setShowWarning] = useState<boolean>(false);
 
+    const handleBasketClick = () => {
+        const authStatus = typeof window !== 'undefined' && sessionStorage.getItem('isAuthenticated') === 'true';
+        if (!authStatus) {
+            setShowWarning(true);
+        } else {
+            toggleBasket();
+        }
+    };
 
     return (
         <nav>
@@ -31,10 +42,12 @@ export default function SiteNav() {
                     </li>
                 ))}
                 <li className="relative">
-                    <button onClick={toggleBasket} className="p-2">
+                    <button onClick={handleBasketClick} className="p-2">
                         <img src="./basket-fill.svg" alt="Basket" className="w-6 h-6" />
                     </button>
-                    {isBasketOpen && <Basket/>} ({basket.length})
+                    <ProtectedPage showWarning={showWarning}>
+                        {isBasketOpen && <Basket />} ({basket.length})
+                    </ProtectedPage>
                 </li>
             </ul>
         </nav>
