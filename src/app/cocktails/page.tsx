@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function Page(){
     return(
-        <main className="max-w-6xl my-8">
+        <main className="w-6xl mx-auto my-8 px-4">
             <SearchPage/>
         </main>
     )

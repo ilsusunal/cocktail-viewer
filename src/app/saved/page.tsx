@@ -1,4 +1,3 @@
-import ProtectedPage from "@/components/ProtectedPage";
 import SavedPage from "./SavedPage";
 
 export const metadata = {
@@ -7,10 +6,8 @@ export const metadata = {
 
 export default function Page() {
     return (
-        <ProtectedPage showWarning={true}>
-            <main className="max-w-6xl my-8">
-                <SavedPage />
-            </main>
-        </ProtectedPage>
+        <main className="max-w-6xl my-8">
+            <SavedPage />
+        </main>
     )
 }

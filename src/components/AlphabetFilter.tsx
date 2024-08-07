@@ -11,7 +11,7 @@ export default function AlphabetFilter({ letters, selectedLetter, onSelectLetter
                 <button
                     key={letter}
                     onClick={() => onSelectLetter(letter)}
-                    className="text-gray-800 text-lg font-black active:underline"
+                    className={ letter === selectedLetter ? "text-amber-600 text-lg font-black underline" : "text-gray-800 text-lg font-black"}
                 >
                     {letter}
                 </button>

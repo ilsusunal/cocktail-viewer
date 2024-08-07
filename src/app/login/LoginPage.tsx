@@ -1,26 +1,24 @@
 "use client"
 
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
-const dummyUser = {
-    username: 'user',
-    password: 'password123'
-};
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
+    const { login, isAuthenticated } = useAuth();
+    const router = useRouter();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const router = useRouter();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push('/cocktails');
+        }
+    }, [isAuthenticated, router]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (username === dummyUser.username && password === dummyUser.password) {
-            sessionStorage.setItem('isAuthenticated', 'true');
-            router.push('/search');
-        } else {
-            alert('Invalid username or password');
-        }
+        login(username, password);
     };
 
     return (

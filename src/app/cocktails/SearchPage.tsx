@@ -34,9 +34,9 @@ export default function SearchPage() {
     }, [searchTerm, selectedLetter]);
 
     return (
-        <main>
+        <main className="max-w-6xl mx-auto">
             <section className="flex items-center justify-between">
-                <h1 className="text-2xl text-gray-800 font-bold">Search Cocktails</h1>
+                <h1 className="text-2xl text-gray-800 font-bold">All Cocktails</h1>
                 <input
                     type="text"
                     value={searchTerm}
@@ -45,7 +45,7 @@ export default function SearchPage() {
                     className="py-2 px-4 bg-gray-800 text-white hover:bg-amber-800 rounded-full"
                 />
             </section>
-            <AlphabetFilter letters={letters} onSelectLetter={setSelectedLetter} selectedLetter={"A"} />
+            <AlphabetFilter letters={letters} onSelectLetter={setSelectedLetter} selectedLetter={selectedLetter} />
             <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {cocktails.map(cocktail => (
                     <CocktailCard key={cocktail.idDrink} cocktail={cocktail} />
