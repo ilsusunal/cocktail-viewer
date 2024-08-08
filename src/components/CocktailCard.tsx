@@ -5,6 +5,7 @@ import { Cocktail } from "@/models/cocktail";
 import { useEffect, useState } from "react";
 import Warning from "./Warning";
 import { useRouter } from "next/navigation";
+import Confirmation from "./Confirmation";
 
 interface CocktailCardProps {
     cocktail: Cocktail;
@@ -14,16 +15,26 @@ export default function CocktailCard({ cocktail }: CocktailCardProps) {
     const { addToBasket } = useBasket();
     const { isAuthenticated } = useAuth();
     const [showWarning, setShowWarning] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false);
     const [countdown, setCountdown] = useState(2);
     const router = useRouter();
 
     const handleAddToBasket = () => {
         if (isAuthenticated) {
-            addToBasket(cocktail);
+            setShowConfirmation(true);
         } else {
             setShowWarning(true);
-            setCountdown(3); 
+            setCountdown(3);
         }
+    };
+
+    const handleConfirm = () => {
+        addToBasket(cocktail);
+        setShowConfirmation(false);
+    };
+
+    const handleCancel = () => {
+        setShowConfirmation(false);
     };
 
     useEffect(() => {
@@ -41,7 +52,8 @@ export default function CocktailCard({ cocktail }: CocktailCardProps) {
             return () => clearInterval(interval);
         }
     }, [showWarning, router]);
-    
+
+
     return (
         <div className=" hover:text-white bg-zinc-100 hover:bg-gray-800 rounded-lg p-4 flex flex-col items-center">
             <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="w-full h-48 object-cover rounded border-2 border-zinc-100" />
@@ -55,6 +67,13 @@ export default function CocktailCard({ cocktail }: CocktailCardProps) {
                 Add to Basket
             </button>
             {showWarning && <Warning message="Log in to add items to the basket !!!" countdown={countdown} />}
+            {showConfirmation && (
+                <Confirmation
+                    message="Do you want to add this recipe to your basket?"
+                    onConfirm={handleConfirm}
+                    onCancel={handleCancel}
+                />
+            )}
         </div>
     );
 }
