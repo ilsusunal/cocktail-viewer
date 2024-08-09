@@ -2,7 +2,7 @@
 
 This project is a Cocktail Viewer built with Next.js using The Cocktail DB API. It allows users to search for cocktails, manage a cocktail basket, and save their favorite drinks. The app also features an login page to secure access to cocktail pages.
 
-You can visit the deployed on Vercel : [The Cocktail Viewer](https://the-cocktail-viewer-4ejha9fy7-ilsus-projects.vercel.app/)
+You can visit the deployed on Vercel : [The Cocktail Viewer](https://the-cocktail-viewer.vercel.app/)
 
 Try to log in with:
 - `Username`: 'test'
