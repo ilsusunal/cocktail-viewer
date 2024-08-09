@@ -5,7 +5,7 @@ export const metadata = {
 };
 export default async function Page() {
     return (
-        <main className="max-w-6xl my-8">
+        <main className="max-w-5xl m-4 lg:m-20">
             <LoginPage />
         </main>
     )

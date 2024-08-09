@@ -4,7 +4,16 @@ import AlphabetFilter from "@/components/AlphabetFilter";
 import CocktailCard from "@/components/CocktailCard";
 import { fetchCocktailsByLetter, fetchCocktailsByName } from "@/lib/api";
 import { Cocktail } from "@/models/cocktail";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+function debounce<T extends (...args: any[]) => void>(func: T, timeout = 300): (...args: Parameters<T>) => void {
+    let timer: NodeJS.Timeout;
+    return (...args: Parameters<T>) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func(...args); }, timeout);
+    };
+}
+
 
 export default function SearchPage() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -13,36 +22,45 @@ export default function SearchPage() {
     const [letters, setLetters] = useState<string[]>([]);
 
     useEffect(() => {
-        const fetchLetters = async () => {
-            setLetters('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
-        };
-        fetchLetters();
+        setLetters('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
     }, []);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            let result: Cocktail[] = [];
-            if (searchTerm) {
-                result = await fetchCocktailsByName(searchTerm);
-            } else if (selectedLetter) {
-                result = await fetchCocktailsByLetter(selectedLetter);
-            }
-            setCocktails(result);
-        };
+    const fetchCocktails = async (term: string, letter: string) => {
+        let result: Cocktail[] = [];
+        if (term) {
+            result = await fetchCocktailsByName(term);
+        } else if (letter) {
+            result = await fetchCocktailsByLetter(letter);
+        }
+        setCocktails(result);
+    };
 
-        fetchData();
-    }, [searchTerm, selectedLetter]);
+    const debouncedFetch = useCallback(
+        debounce((value: string) => fetchCocktails(value, selectedLetter), 300),
+        [selectedLetter]
+    );
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+        debouncedFetch(e.target.value);
+    };
+
+    useEffect(() => {
+        fetchCocktails(searchTerm, selectedLetter);
+    }, [selectedLetter]);
 
     return (
-        <main className="max-w-6xl mx-auto">
+        <main className="max-w-5xl mx-auto">
             <section className="flex items-center justify-between">
-                <h1 className="text-2xl text-gray-800 font-bold">All Cocktails</h1>
+                <h1 className="text-2xl text-mainBlue bg-mainYellow rounded px-8 underline-offset-1 decoration-4 decoration-mainYellow font-bold">
+                    All Cocktails
+                </h1>
                 <input
                     type="text"
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleSearchChange}
                     placeholder="Search by name"
-                    className="py-2 px-4 bg-gray-800 text-white hover:bg-amber-800 rounded-full"
+                    className="py-2 px-4  text-accentDark/50 border-2 border-mainOrange hover:bg-accentBlue rounded"
                 />
             </section>
             <AlphabetFilter letters={letters} onSelectLetter={setSelectedLetter} selectedLetter={selectedLetter} />

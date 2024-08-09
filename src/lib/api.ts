@@ -1,27 +1,28 @@
 import { Cocktail } from "@/models/cocktail";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "";
 
 export async function fetchCocktailsByName(name: string): Promise<Cocktail[]> {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
+    const response = await fetch(`${BASE_URL}/search.php?s=${name}`);
     const data = await response.json();
     return data.drinks || [];
 }
 
 export async function fetchCocktailsByLetter(letter: string): Promise<Cocktail[]> {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`);
+    const response = await fetch(`${BASE_URL}/search.php?f=${letter}`);
     const data = await response.json();
     return data.drinks || [];
 }
 
 export async function fetchCocktailCategories(): Promise<string[]> {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list`);
+    const response = await fetch(`${BASE_URL}/list.php?c=list`);
     const data = await response.json();
     return data.drinks.map((category: { strCategory: string }) => category.strCategory) || [];
 }
 
 
 export async function fetchIngredients(): Promise<{ name: string; image: string }[]> {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list`);
+    const response = await fetch(`${BASE_URL}/list.php?i=list`);
     const data = await response.json();
 
     const ingredients = data.drinks

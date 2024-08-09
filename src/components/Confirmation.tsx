@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface ConfirmationProps {
     message: string;
@@ -9,20 +9,28 @@ interface ConfirmationProps {
 }
 
 export default function Confirmation({ message, onConfirm, onCancel }: ConfirmationProps) {
+    
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, []);
+    
     return (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-800/75">
-            <div className="p-16 text-xl bg-zinc-50 flex flex-col items-center text-gray-800 rounded">
+        <div className="absolute inset-0 flex items-center justify-center bg-accentDark">
+            <div className="p-16 text-xl bg-white borber-2 border-mainOrange flex flex-col items-center text-mainBlue rounded">
                 {message}
                 <div className="flex mt-8 space-x-4">
                     <button
                         onClick={onConfirm}
-                        className="bg-amber-500 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded"
+                        className="bg-mainOrange hover:bg-white hover:border-2 border-mainBlue hover:text-mainBlue text-white font-bold py-1 px-6 rounded"
                     >
                         Yes
                     </button>
                     <button
                         onClick={onCancel}
-                        className="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded"
+                        className="bg-mainBlue hover:bg-white hover:border-2 border-mainOrange hover:text-mainOrange text-white font-bold py-1 px-6 rounded"
                     >
                         No
                     </button>

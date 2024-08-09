@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-zinc-200 min-h-screen `}>
+      <body className={`${inter.className} bg-accentLight min-h-screen `}>
         <AuthProvider>
           <BasketProvider>
             <Header />

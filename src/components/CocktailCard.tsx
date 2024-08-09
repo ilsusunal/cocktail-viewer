@@ -55,14 +55,31 @@ export default function CocktailCard({ cocktail }: CocktailCardProps) {
 
 
     return (
-        <div className=" hover:text-white bg-zinc-100 hover:bg-gray-800 rounded-lg p-4 flex flex-col items-center">
+        <div className="border-2 border-accentDark/20 hover:border-mainBlue  hover:text-mainOrange rounded p-4 flex flex-col items-center">
             <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="w-full h-48 object-cover rounded border-2 border-zinc-100" />
             <p className="text-sm mt-2">{cocktail.strCategory} | {cocktail.strAlcoholic}</p>
-            <h3 className="text-lg font-bold my-2">{cocktail.strDrink}</h3>
-            <p className="text-sm mt-2">Blablabla</p>
+            <h3 className="text-lg font-black my-2 text-mainBlue px-4 py-1 underline-offset-1 decoration-4 decoration-mainYellow">{cocktail.strDrink}</h3>
+            <ul className="text-xs my-1 flex flex-wrap justify-center">
+                {Array.from({ length: 15 }, (_, i) => i + 1).map((num, index) => {
+                    const ingredient = cocktail[`strIngredient${num}` as keyof Cocktail];
+                    const isEven = index % 2 === 0;
+
+                    return (
+                        ingredient && (
+                            <li
+                                key={num}
+                                className={`flex items-center ${isEven ? 'text-accentDark/50' : 'text-accentDark/25'}`}
+                            >
+                                {ingredient}
+                                {index < 14 && cocktail[`strIngredient${num + 1}` as keyof Cocktail] && ' - '}
+                            </li>
+                        )
+                    );
+                })}
+            </ul>
             <button
                 onClick={handleAddToBasket}
-                className="mt-2 bg-amber-500 hover:bg-amber-800 text-white py-1 px-4 rounded-full"
+                className="mt-2 bg-mainOrange hover:bg-mainBlue text-white text-sm py-1 px-4 rounded"
             >
                 Add to Basket
             </button>

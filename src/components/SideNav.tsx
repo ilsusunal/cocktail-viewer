@@ -16,8 +16,12 @@ export default function SideNav() {
     const siteRoutes = [
         { href: '/', label: 'Home' },
         { href: '/cocktails', label: 'Cocktails' },
-        isAuthenticated ? { href: '/logout', label: 'Logout' } : { href: '/login', label: 'Login' },
-        ...(isAuthenticated ? [{ href: '/saved', label: 'Saved Cocktails' }] : []),
+        ...(isAuthenticated ? [
+            { href: '/saved', label: 'Saved Recipes' },
+            { href: '/logout', label: 'Logout' }
+        ] : [
+            { href: '/login', label: 'Login' }
+        ]),
     ];
 
     const handleLogout = (e: React.MouseEvent) => {
@@ -41,17 +45,24 @@ export default function SideNav() {
                             <Link
                                 href={siteRoute.href}
                                 onClick={siteRoute.href === '/logout' ? handleLogout : undefined}
-                                className={`hover:underline ${pathname === siteRoute.href ? 'font-extrabold text-gray-800' : ''}`}
+                                className={`border-l-2 border-accentBlue px-4 py-1 hover:underline hover:underline-offset-1 hover:decoration-4 decoration-mainYellow ${pathname === siteRoute.href ? 'font-extrabold text-mainBlue' : ''}`}
                             >
                                 {siteRoute.label}
                             </Link>
                         </li>
                     ))}
                     <li className="relative">
-                        <button onClick={toggleBasket} className="p-2">
-                            <img src="./basket-fill.svg" alt="Basket" className="w-6 h-6" />
-                        </button>
-                        {isBasketOpen && <Basket />} ({basket.length})
+                        <div className="flex items-center">
+                            <button onClick={toggleBasket} className="border-l-2 border-accentBlue px-4 py-1 ">
+                                {isBasketOpen ? (
+                                    <img src="./basket-blue.svg" alt="Basket Open" className="w-6 h-6" />
+                                ) : (
+                                    <img src="./basket-dark.svg" alt="Basket Closed" className="w-6 h-6" />
+                                )}
+                            </button>
+                            ({basket.length})
+                        </div>
+                        {isBasketOpen && <Basket />}
                     </li>
                 </ul>
             </div>

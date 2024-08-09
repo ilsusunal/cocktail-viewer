@@ -28,13 +28,15 @@ export default function SavedPage() {
 
     return (
         <main className="m-4">
-            <h1 className="text-xl font-bold mb-8">Saved Cocktails</h1>
+            <h1 className="text-2xl text-mainBlue bg-mainYellow rounded px-8 font-bold mb-8 w-80">
+                Saved Cocktails
+            </h1>
             {savedCocktails.length === 0 ? (
                 <p>No saved cocktails found.</p>
             ) : (
                 <div className="flex flex-col gap-4 ">
                     {savedCocktails.map(cocktail => (
-                        <div key={cocktail.idDrink} className="gap-8 hover:text-white bg-zinc-100 hover:bg-gray-800 rounded-lg p-4 lg:flex items-center">
+                        <div key={cocktail.idDrink} className="gap-8 border-4 border-accentBlue hover:border-mainBlue rounded-lg p-4 lg:flex items-center">
                             <img
                                 src={cocktail.strDrinkThumb}
                                 alt={cocktail.strDrink}
@@ -43,12 +45,12 @@ export default function SavedPage() {
                             <div>
                                 <div className="lg:flex justify-between mb-4 items-center ">
                                     <div className="lg:flex gap-4 mb-4 items-center">
-                                    <h3 className="text-lg font-bold">{cocktail.strDrink}</h3>
-                                    <p className="text-amber-900">{cocktail.strCategory} - {cocktail.strAlcoholic} - {cocktail.strGlass}</p>
+                                    <h3 className="text-lg font-bold text-mainBlue">{cocktail.strDrink}</h3>
+                                    <p className="text-accentDark/50 text-sm">{cocktail.strCategory} - {cocktail.strAlcoholic} - {cocktail.strGlass}</p>
                                     </div>
                                     <button
                                         onClick={() => removeCocktail(cocktail.idDrink)}
-                                        className="mt-2 bg-gray-800 border-2 border-white hover:bg-gray-600 text-white py-1 px-4 rounded-full"
+                                        className="mt-2 bg-mainOrange hover:bg-mainBlue text-white py-1 px-6 rounded"
                                     >
                                         Remove
                                     </button>

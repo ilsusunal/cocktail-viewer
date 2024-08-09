@@ -6,12 +6,12 @@ interface AlphabetFilterProps {
 
 export default function AlphabetFilter({ letters, selectedLetter, onSelectLetter }: AlphabetFilterProps) {
     return (
-        <div className="flex flex-wrap justify-center my-8 gap-4">
+        <div className="flex flex-wrap justify-center my-8 gap-4 text-lg font-bold ">
             {letters.map(letter => (
                 <button
                     key={letter}
                     onClick={() => onSelectLetter(letter)}
-                    className={ letter === selectedLetter ? "text-amber-600 text-lg font-black underline" : "text-gray-800 text-lg font-black"}
+                    className={ letter === selectedLetter ? "text-mainBlue  underline underline-offset-1 decoration-4 decoration-mainYellow" : "text-accentDark"}
                 >
                     {letter}
                 </button>
