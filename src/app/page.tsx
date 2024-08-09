@@ -20,7 +20,7 @@ export default async function Home() {
           </p>
           <Link href="/login">
             <div className="px-8 lg:px-20 flex items-center mb-8 lg:my-2">
-              <p className="text-accentLight bg-mainOrange hover:bg-mainBlue rounded py-1 px-6 text-lg font-medium">Login</p>
+              <p className="text-accentLight bg-mainOrange hover:bg-mainBlue rounded px-12 text-lg font-medium">Login</p>
             </div>
           </Link>
         </div>
