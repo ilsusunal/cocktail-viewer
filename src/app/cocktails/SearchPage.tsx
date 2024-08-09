@@ -51,8 +51,8 @@ export default function SearchPage() {
 
     return (
         <main className="max-w-5xl mx-auto">
-            <section className="flex items-center justify-between">
-                <h1 className="text-2xl text-mainBlue bg-mainYellow rounded px-8 underline-offset-1 decoration-4 decoration-mainYellow font-bold">
+            <section className="flex items-center justify-between gap-2">
+                <h1 className="text-xl lg:text-2xl text-mainBlue bg-mainYellow rounded px-8 underline-offset-1 decoration-4 decoration-mainYellow font-bold">
                     All Cocktails
                 </h1>
                 <input
@@ -60,7 +60,7 @@ export default function SearchPage() {
                     value={searchTerm}
                     onChange={handleSearchChange}
                     placeholder="Search by name"
-                    className="py-2 px-4  text-accentDark/50 border-2 border-mainOrange hover:bg-accentBlue rounded"
+                    className="py-1 px-4  text-accentDark/50 border-2 border-mainOrange hover:bg-accentBlue rounded"
                 />
             </section>
             <AlphabetFilter letters={letters} onSelectLetter={setSelectedLetter} selectedLetter={selectedLetter} />

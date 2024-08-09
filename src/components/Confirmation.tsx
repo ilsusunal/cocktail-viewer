@@ -18,7 +18,7 @@ export default function Confirmation({ message, onConfirm, onCancel }: Confirmat
     }, []);
     
     return (
-        <div className="absolute inset-0 flex items-center justify-center bg-accentDark">
+        <div className="fixed inset-0 flex items-center justify-center bg-accentDark">
             <div className="p-16 text-xl bg-white borber-2 border-mainOrange flex flex-col items-center text-mainBlue rounded">
                 {message}
                 <div className="flex mt-8 space-x-4">

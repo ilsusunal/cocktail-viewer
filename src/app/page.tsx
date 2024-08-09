@@ -10,19 +10,19 @@ export default async function Home() {
     <main className="max-w-6xl mx-auto m-2 lg:m-4">
       <div className="border-2 border-accentBlue rounded-3xl p-12 m-4 lg:m-8 lg:flex-row flex flex-col">
         <div className="justify-center flex flex-col gap-4">
-          <p className="px-20  text-mainOrange">+ Browse cocktails by name <br /> + Log in and save the recipes </p>
-          <h1 className="text-5xl text-mainBlue underline underline-offset-1 decoration-4 decoration-mainYellow font-bold mb-2 lg:mb-8">
+          <p className="px-8 lg:px-20  text-mainOrange">+ Browse cocktails by name <br /> + Log in and save the recipes </p>
+          <h1 className="text-3xl text-mainBlue underline underline-offset-1 decoration-4 decoration-mainYellow font-bold my-2 lg:mb-2">
             Welcome to the Cocktail Viewer!
           </h1>
-          <div className="px-20 space-y-2 text-accentDark ">
-            <p>This assignment uses CocktailDB. You can browse cocktails by name. If you like a cocktail, you can add it to your basket and save it to your recipe list.</p>
-            <p>You need to be logged in to add cocktails to your basket and save them to your list, which you can view in the top right corner after logging in.</p>
-          </div>
-            <Link href="/login">
-              <div className="flex items-center my-2 px-20">
-                <p className="text-accentLight bg-mainOrange hover:bg-mainBlue rounded py-1 px-6 text-lg font-medium">Login</p>
-              </div>
-            </Link>
+          <p className="px-8 lg:px-20 text-accentDark ">
+            Browse and save cocktails from CocktailDB.
+            Log in to add them to your basket and recipe list, accessible from the top right corner.
+          </p>
+          <Link href="/login">
+            <div className="px-8 lg:px-20 flex items-center mb-8 lg:my-2">
+              <p className="text-accentLight bg-mainOrange hover:bg-mainBlue rounded py-1 px-6 text-lg font-medium">Login</p>
+            </div>
+          </Link>
         </div>
         <img src="./cocktail-viewer.png" alt="Welcome" className="w-auto h-48 lg:h-96 mr-16 mb-4" />
       </div>
