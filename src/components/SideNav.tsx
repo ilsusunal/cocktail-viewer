@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation"
-import Basket from "./Basket";
+
 import { useBasket } from "@/context/BasketContext";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
+import Basket from "./basket";
 
 export default function SideNav() {
     const pathname = usePathname();
